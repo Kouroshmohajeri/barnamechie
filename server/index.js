@@ -30,6 +30,9 @@ app.use("/api/serviceComments", serviceCommentRoutes);
 app.use("/api/eventComments", eventCommentRoutes);
 app.use("/api/payments", paymentRoutes);
 app.use("/api/advertisements", advertisementRoutes);
+app.get("/", (req, res) => {
+  res.send("Backend is working!");
+});
 
 // Start server
 const PORT = process.env.PORT || 8443;
