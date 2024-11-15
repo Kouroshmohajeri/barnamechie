@@ -1,4 +1,3 @@
-// src/controllers/advertisementController.js
 import AdvertisementRepository from "../repositories/advertisementRepository.js";
 import sendResponse from "../services/response.js";
 
@@ -9,7 +8,7 @@ class AdvertisementController {
         await AdvertisementRepository.createAdvertisement(req.body);
       sendResponse(res, 201, newAdvertisement);
     } catch (error) {
-      sendResponse(res, 500, { message: error.message });
+      sendResponse(res, 500, null, "Error creating advertisement", error);
     }
   }
 
@@ -19,7 +18,7 @@ class AdvertisementController {
         await AdvertisementRepository.getAllAdvertisements();
       sendResponse(res, 200, advertisements);
     } catch (error) {
-      sendResponse(res, 500, { message: error.message });
+      sendResponse(res, 500, null, "Error fetching advertisements", error);
     }
   }
 
@@ -30,9 +29,9 @@ class AdvertisementController {
       );
       advertisement
         ? sendResponse(res, 200, advertisement)
-        : sendResponse(res, 404, { message: "Advertisement not found" });
+        : sendResponse(res, 404, null, "Advertisement not found");
     } catch (error) {
-      sendResponse(res, 500, { message: error.message });
+      sendResponse(res, 500, null, "Error fetching advertisement", error);
     }
   }
 
@@ -45,9 +44,9 @@ class AdvertisementController {
         );
       updatedAdvertisement
         ? sendResponse(res, 200, updatedAdvertisement)
-        : sendResponse(res, 404, { message: "Advertisement not found" });
+        : sendResponse(res, 404, null, "Advertisement not found");
     } catch (error) {
-      sendResponse(res, 500, { message: error.message });
+      sendResponse(res, 500, null, "Error updating advertisement", error);
     }
   }
 
@@ -59,9 +58,9 @@ class AdvertisementController {
         ? sendResponse(res, 200, {
             message: "Advertisement deleted successfully",
           })
-        : sendResponse(res, 404, { message: "Advertisement not found" });
+        : sendResponse(res, 404, null, "Advertisement not found");
     } catch (error) {
-      sendResponse(res, 500, { message: error.message });
+      sendResponse(res, 500, null, "Error deleting advertisement", error);
     }
   }
 }

@@ -1,4 +1,3 @@
-// src/controllers/categoryController.js
 import CategoryRepository from "../repositories/categoryRepository.js";
 import sendResponse from "../services/response.js";
 
