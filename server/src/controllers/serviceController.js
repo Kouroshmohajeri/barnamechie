@@ -1,10 +1,16 @@
-import ServiceRepository from "../repositories/serviceRepository.js";
+import {
+  createService,
+  getServiceById,
+  updateService,
+  deleteService,
+  getAllServices,
+} from "../repositories/serviceRepository.js";
 import sendResponse from "../services/response.js";
 
 class ServiceController {
   async createService(req, res) {
     try {
-      const newService = await ServiceRepository.createService(req.body);
+      const newService = await createService(req.body);
       sendResponse(res, 201, newService);
     } catch (error) {
       sendResponse(res, 500, null, "Error creating service", error);
@@ -13,7 +19,7 @@ class ServiceController {
 
   async getServiceById(req, res) {
     try {
-      const service = await ServiceRepository.getServiceById(req.params.id);
+      const service = await getServiceById(req.params.id);
       service
         ? sendResponse(res, 200, service)
         : sendResponse(res, 404, null, "Service not found");
@@ -24,10 +30,7 @@ class ServiceController {
 
   async updateService(req, res) {
     try {
-      const updatedService = await ServiceRepository.updateService(
-        req.params.id,
-        req.body
-      );
+      const updatedService = await updateService(req.params.id, req.body);
       updatedService
         ? sendResponse(res, 200, updatedService)
         : sendResponse(res, 404, null, "Service not found");
@@ -38,9 +41,7 @@ class ServiceController {
 
   async deleteService(req, res) {
     try {
-      const deletedService = await ServiceRepository.deleteService(
-        req.params.id
-      );
+      const deletedService = await deleteService(req.params.id);
       deletedService
         ? sendResponse(res, 200, { message: "Service deleted successfully" })
         : sendResponse(res, 404, null, "Service not found");
@@ -51,7 +52,7 @@ class ServiceController {
 
   async getAllServices(req, res) {
     try {
-      const services = await ServiceRepository.getAllServices();
+      const services = await getAllServices();
       sendResponse(res, 200, services);
     } catch (error) {
       sendResponse(res, 500, null, "Error fetching services", error);
