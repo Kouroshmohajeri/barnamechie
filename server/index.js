@@ -14,9 +14,12 @@ import advertisementRoutes from "./src/routes/advertisementRoutes.js";
 
 dotenv.config();
 const app = express();
-
+const corsOptions = {
+  origin: "*",
+  optionsSuccessStatus: 200,
+};
 app.use(express.json());
-app.use(cors());
+app.use(cors(corsOptions));
 
 // Connect to MongoDB
 connectDB(); // Initiates MongoDB connection using database.js
