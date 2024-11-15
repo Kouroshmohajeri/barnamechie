@@ -1,5 +1,5 @@
 import Event from "../models/Event.js";
-import { sendResponse } from "../services/response.js";
+import sendResponse from "../services/response.js";
 
 // Create an event
 export const createEvent = async (req, res) => {
