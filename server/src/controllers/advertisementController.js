@@ -1,6 +1,6 @@
 // src/controllers/advertisementController.js
 import AdvertisementRepository from "../repositories/advertisementRepository.js";
-import sendResponse from "../services/sendResponse.js";
+import sendResponse from "../services/response.js";
 
 class AdvertisementController {
   async createAdvertisement(req, res) {
