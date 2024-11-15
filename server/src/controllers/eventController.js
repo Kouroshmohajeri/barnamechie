@@ -1,5 +1,5 @@
 import Event from "../models/Event.js";
-import { sendResponse } from "../services/response.js"; // You can create this to handle success and error responses
+import { sendResponse } from "../services/response.js";
 
 // Create an event
 export const createEvent = async (req, res) => {
@@ -47,7 +47,7 @@ export const createEvent = async (req, res) => {
     const savedEvent = await newEvent.save();
     sendResponse(res, 201, "Event created successfully", savedEvent);
   } catch (error) {
-    sendResponse(res, 500, "Error creating event", error);
+    sendResponse(res, 500, "Error creating event", null, error);
   }
 };
 
@@ -59,7 +59,7 @@ export const getAllEvents = async (req, res) => {
       .populate("categoryId");
     sendResponse(res, 200, "Events fetched successfully", events);
   } catch (error) {
-    sendResponse(res, 500, "Error fetching events", error);
+    sendResponse(res, 500, "Error fetching events", null, error);
   }
 };
 
@@ -74,7 +74,7 @@ export const getEventById = async (req, res) => {
     }
     sendResponse(res, 200, "Event fetched successfully", event);
   } catch (error) {
-    sendResponse(res, 500, "Error fetching event", error);
+    sendResponse(res, 500, "Error fetching event", null, error);
   }
 };
 
@@ -91,7 +91,7 @@ export const updateEvent = async (req, res) => {
     }
     sendResponse(res, 200, "Event updated successfully", updatedEvent);
   } catch (error) {
-    sendResponse(res, 500, "Error updating event", error);
+    sendResponse(res, 500, "Error updating event", null, error);
   }
 };
 
@@ -104,6 +104,6 @@ export const deleteEvent = async (req, res) => {
     }
     sendResponse(res, 200, "Event deleted successfully");
   } catch (error) {
-    sendResponse(res, 500, "Error deleting event", error);
+    sendResponse(res, 500, "Error deleting event", null, error);
   }
 };
