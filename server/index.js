@@ -1,4 +1,3 @@
-// index.js
 import express from "express";
 import dotenv from "dotenv";
 import cors from "cors";
@@ -33,7 +32,7 @@ app.use("/api/serviceComments", serviceCommentRoutes);
 app.use("/api/eventComments", eventCommentRoutes);
 app.use("/api/payments", paymentRoutes);
 app.use("/api/advertisements", advertisementRoutes);
-app.get("/", (req, res) => {
+app.get("/api/", (req, res) => {
   res.send("Backend is working!");
 });
 
