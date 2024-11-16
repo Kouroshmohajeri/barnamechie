@@ -1,10 +1,14 @@
-// src/controllers/paymentController.js
 import PaymentRepository from "../repositories/paymentRepository.js";
 import sendResponse from "../services/response.js";
 
 class PaymentController {
   async createPayment(req, res) {
     try {
+      // Assuming user needs to be authenticated and authorized for payment creation
+      if (!req.user) {
+        return sendResponse(res, 401, { message: "User not authenticated" });
+      }
+
       const newPayment = await PaymentRepository.createPayment(req.body);
       sendResponse(res, 201, newPayment);
     } catch (error) {
@@ -34,6 +38,11 @@ class PaymentController {
 
   async updatePayment(req, res) {
     try {
+      // Check if user is authenticated and authorized to update the payment
+      if (!req.user) {
+        return sendResponse(res, 401, { message: "User not authenticated" });
+      }
+
       const updatedPayment = await PaymentRepository.updatePayment(
         req.params.id,
         req.body
@@ -48,6 +57,11 @@ class PaymentController {
 
   async deletePayment(req, res) {
     try {
+      // Check if user is authenticated and authorized to delete the payment
+      if (!req.user) {
+        return sendResponse(res, 401, { message: "User not authenticated" });
+      }
+
       const deletedPayment = await PaymentRepository.deletePayment(
         req.params.id
       );

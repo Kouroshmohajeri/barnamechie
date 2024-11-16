@@ -14,6 +14,7 @@ const userSchema = new mongoose.Schema({
   numberOfServices: { type: Number, default: 0 },
   lastService: { type: Date },
   isVerified: { type: Boolean, default: false },
+  role: { type: String, enum: ["user", "admin"], default: "user" },
 });
 
 export default mongoose.model("User", userSchema);

@@ -8,7 +8,6 @@ export const createEvent = async (req, res) => {
       title,
       shortDescription,
       longDescription,
-      eventHolder,
       eventStartDate,
       eventEndDate,
       isCancelled,
@@ -24,11 +23,14 @@ export const createEvent = async (req, res) => {
       time,
     } = req.body;
 
+    // Ensure the authenticated user's ID is set as the event holder
+    const eventHolder = req.user._id; // The authenticated user's ID
+
     const newEvent = new Event({
       title,
       shortDescription,
       longDescription,
-      eventHolder,
+      eventHolder, // Set eventHolder to the authenticated user's ID
       eventStartDate,
       eventEndDate,
       isCancelled,
