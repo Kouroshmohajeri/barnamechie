@@ -34,8 +34,8 @@ app.use("/api/serviceComments", serviceCommentRoutes);
 app.use("/api/eventComments", eventCommentRoutes);
 app.use("/api/payments", paymentRoutes);
 app.use("/api/advertisements", advertisementRoutes);
-app.use("/countries", countryRoutes);
-app.use("/cities", cityRoutes);
+app.use("/api/countries", countryRoutes);
+app.use("/api/cities", cityRoutes);
 
 // Start server
 const PORT = process.env.PORT || 8443;
