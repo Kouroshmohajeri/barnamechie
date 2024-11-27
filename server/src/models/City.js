@@ -1,9 +1,13 @@
 import mongoose from "mongoose";
 
 const citySchema = new mongoose.Schema({
-  cityId: { type: String, required: true, unique: true },
+  cityId: { type: Number, required: true, unique: true },
   cityName: { type: String, required: true },
-  countryId: { type: String, ref: "Country", required: true },
+  countryId: {
+    type: String,
+    required: true,
+    ref: "Country", // Referencing the countryId in Country model
+  },
 });
 
 export default mongoose.model("City", citySchema);

@@ -3,7 +3,7 @@ import City from "../models/City.js";
 export const createCity = async (data) => await City.create(data);
 
 export const getAllCities = async () =>
-  await City.find().populate("countryId", "name");
+  await City.find().populate("countryId", "name countryId");
 
 export const getCityById = async (id) =>
   await City.findOne({ cityId: id }).populate("countryId", "name");
