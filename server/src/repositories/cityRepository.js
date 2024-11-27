@@ -1,4 +1,4 @@
-import City from "../models/city.model.js";
+import City from "../models/City.js";
 
 export const createCity = async (data) => await City.create(data);
 
