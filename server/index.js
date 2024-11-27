@@ -10,6 +10,8 @@ import serviceCommentRoutes from "./src/routes/serviceCommentRoutes.js";
 import eventCommentRoutes from "./src/routes/eventCommentRoutes.js";
 import paymentRoutes from "./src/routes/paymentRoutes.js";
 import advertisementRoutes from "./src/routes/advertisementRoutes.js";
+import countryRoutes from "./src/routes/countryRoutes.js";
+import cityRoutes from "./src/routes/cityRoutes.js";
 
 dotenv.config();
 const app = express();
@@ -32,9 +34,8 @@ app.use("/api/serviceComments", serviceCommentRoutes);
 app.use("/api/eventComments", eventCommentRoutes);
 app.use("/api/payments", paymentRoutes);
 app.use("/api/advertisements", advertisementRoutes);
-app.get("/api/", (req, res) => {
-  res.send("Backend is working!");
-});
+app.use("/countries", countryRoutes);
+app.use("/cities", cityRoutes);
 
 // Start server
 const PORT = process.env.PORT || 8443;
