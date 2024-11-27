@@ -1,4 +1,3 @@
-// src/controllers/city.controller.js
 import * as CityRepository from "../repositories/cityRepository.js";
 
 export const createCity = async (req, res) => {
