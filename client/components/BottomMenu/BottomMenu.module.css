@@ -1,0 +1,62 @@
+.bottomMenu {
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  padding: 1rem;
+  background: rgba(13, 19, 33, 0.7);
+  backdrop-filter: blur(10px);
+  border-top-right-radius: 2rem;
+  border-top-left-radius: 2rem;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+}
+
+.menuItems {
+  display: flex;
+  justify-content: space-around; /* Evenly distribute buttons */
+  width: 100%;
+}
+
+.menuItem {
+  color: #fff;
+  text-decoration: none;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 2%;
+}
+
+.icon {
+  font-size: 2.21rem; /* Adjust icon size for better layout */
+  transition: font-size 0.3s ease; /* Smooth transition for size change */
+}
+
+.indicator {
+  position: absolute;
+  bottom: -5px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  height: 2px;
+  background-color: #fff;
+  border-radius: 2px;
+}
+
+.divider {
+  width: 50%;
+  border: 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.3);
+  margin: 0.5rem 0;
+}
+
+.footer {
+  color: #fff;
+  font-size: 0.75rem;
+  text-align: center;
+}

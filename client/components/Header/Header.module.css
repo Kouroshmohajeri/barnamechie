@@ -1,0 +1,129 @@
+@font-face {
+  font-family: "IranYekan";
+  src: url("/fonts/iranyekan-cdnfonts/Qs_Iranyekan.ttf");
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  z-index: 1;
+  width: 91%;
+  padding: 10px 20px;
+  background-color: transparent;
+  color: white;
+  background: rgba(13, 19, 33, 0.7);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease-in-out;
+  overflow: hidden;
+}
+
+.headerLeft,
+.headerRight {
+  flex: 1;
+}
+
+.headerRight {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.headerText {
+  flex: 1;
+  font-size: 18px;
+  font-weight: bold;
+  text-align: center;
+  font-family: "IranYekan";
+}
+
+.searchActive {
+  justify-content: space-between;
+  padding: 10px;
+  width: 94%;
+  right: 0;
+  background-color: rgba(13, 19, 33, 1);
+  animation: slideIn 0.3s ease-in-out forwards;
+}
+
+.searchClosing {
+  animation: slideOut 0.3s ease-in-out forwards;
+}
+
+.searchBar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.searchField {
+  direction: rtl;
+  font-family: "IranYekan";
+  flex: 1;
+  margin-right: 10px;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 15px; /* Rounded corners */
+  border: 2px solid transparent; /* Default border */
+  padding: 8px 12px;
+  outline: none;
+  color: white;
+  font-size: 1rem;
+  position: relative;
+  animation: glowingDots 3s linear infinite; /* Continuous moving effect */
+}
+
+@keyframes glowingDots {
+  0% {
+    box-shadow: 0 0 5px rgba(255, 255, 255, 0.3),
+      /* Subtle glow */ 0 0 10px rgba(255, 255, 255, 0.5),
+      /* First dot */ 0 0 15px rgba(255, 255, 255, 0.7); /* Brighter second dot */
+  }
+  25% {
+    box-shadow: 0 0 5px rgba(255, 255, 255, 0.3),
+      0 0 10px rgba(255, 255, 255, 0.7),
+      /* Brighter dot moves */ 0 0 15px rgba(255, 255, 255, 0.9); /* Brighter third dot */
+  }
+  50% {
+    box-shadow: 0 0 5px rgba(255, 255, 255, 0.3),
+      0 0 10px rgba(255, 255, 255, 0.9),
+      /* Moving forward */ 0 0 15px rgba(255, 255, 255, 1); /* The brightest dot */
+  }
+  75% {
+    box-shadow: 0 0 5px rgba(255, 255, 255, 0.3),
+      0 0 10px rgba(255, 255, 255, 0.5),
+      /* Another dot moves */ 0 0 15px rgba(255, 255, 255, 0.7);
+  }
+  100% {
+    box-shadow: 0 0 5px rgba(255, 255, 255, 0.3),
+      0 0 10px rgba(255, 255, 255, 0.5), 0 0 15px rgba(255, 255, 255, 0.7); /* Back to initial state */
+  }
+}
+
+.closeButton {
+  color: white;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideOut {
+  from {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+}

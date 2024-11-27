@@ -1,0 +1,88 @@
+@font-face {
+  font-family: "IranYekan";
+  src: url("/fonts/iranyekan-cdnfonts/Qs_Iranyekan.ttf");
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1rem;
+  position: relative;
+  padding-bottom: 80px;
+}
+
+.pageTitle {
+  text-align: center;
+  font-family: "IranYekan";
+  color: white;
+  font-size: 1.5rem;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1rem;
+}
+
+.card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #001d3d;
+  padding: 1rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease-in-out;
+  font-family: "IranYekan";
+}
+
+.card:hover {
+  transform: scale(1.02);
+}
+
+.textContent {
+  flex: 1;
+  margin-right: 1rem;
+  text-align: right;
+}
+
+.title {
+  font-size: 1.25rem;
+  font-weight: bold;
+  color: white;
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.description {
+  font-size: 0.9rem;
+  color: white;
+  margin-top: 0.5rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3; /* Limits description to 3 lines */
+  -webkit-box-orient: vertical;
+}
+
+.category {
+  font-size: 0.9rem;
+  color: #ef233c;
+  margin-top: 0.5rem;
+  font-weight: bold;
+  display: block;
+}
+
+.imageWrapper {
+  flex-shrink: 0;
+}
+
+.image {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 8px;
+}
