@@ -8,6 +8,7 @@ export const createCountry = async (countryData) => {
 
 export const getAllCountries = async () => {
   const response = await API.get("/countries");
+  console.log("response", response);
   return response.data;
 };
 

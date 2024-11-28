@@ -1,11 +1,13 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import { getAllCountries } from "@/api/countries/actions.js"; // Import your API function
+import { getAllCountries } from "@/api/countries/actions.js";
+import { getAllCities } from "@/api/cities/actions.js";
+import styles from "./LocationDropdown.module.css";
 
 const CountryDropdown = () => {
   const [location, setLocation] = useState({ city: "", country: "" });
   const [selectedValue, setSelectedValue] = useState("");
-  const [countries, setCountries] = useState([]);
+  const [locationOptions, setLocationOptions] = useState([]);
 
   // Fetch user's location using IP geolocation API
   useEffect(() => {
@@ -25,53 +27,73 @@ const CountryDropdown = () => {
 
   // Fetch countries from the backend
   useEffect(() => {
-    const fetchCountries = async () => {
+    const fetchCountriesAndCities = async () => {
       try {
-        const data = await getAllCountries();
-        setCountries(data); // Assuming data is an array of country objects
+        // Fetch all countries
+        const countriesData = await getAllCountries();
+        // Filter supported countries (isSupported = true)
+        const supportedCountries = countriesData.filter(
+          (country) => country.isSupported === true
+        );
+
+        // Fetch all cities
+        const citiesData = await getAllCities();
+
+        // Combine cities and countries
+        const combinedLocations = supportedCountries
+          .map((country) => {
+            // Get all cities for the current supported country
+            const citiesInCountry = citiesData.filter(
+              (city) => city.countryId === country.countryId
+            );
+
+            // Combine cities with country name
+            return citiesInCountry.map(
+              (city) => `${city.cityName}, ${country.name}`
+            );
+          })
+          .flat(); // Flatten the nested array into a single array
+
+        setLocationOptions(combinedLocations);
       } catch (error) {
-        console.error("Failed to fetch countries:", error);
+        console.error("Failed to fetch countries or cities:", error);
       }
     };
 
-    fetchCountries();
+    fetchCountriesAndCities();
   }, []);
 
+  // Check if the detected location is in the list
+  const isLocationAvailable = locationOptions.includes(
+    `${location.city}, ${location.country}`
+  );
+
+  // If the location is available, set it as default
+  useEffect(() => {
+    if (isLocationAvailable) {
+      setSelectedValue(`${location.city}, ${location.country}`);
+    } else {
+      setSelectedValue("");
+    }
+  }, [location, isLocationAvailable]);
+
   return (
-    <div style={{ fontFamily: "Arial, sans-serif", margin: "10px" }}>
-      <label
-        htmlFor="countryDropdown"
-        style={{ marginBottom: "5px", display: "block" }}
-      >
-        Select Country:
-      </label>
+    <div className={styles.container}>
       <select
         id="countryDropdown"
         value={selectedValue}
         onChange={(e) => setSelectedValue(e.target.value)}
-        style={{
-          padding: "8px",
-          borderRadius: "4px",
-          border: "1px solid #ccc",
-          width: "100%",
-          maxWidth: "300px",
-        }}
+        className={styles.dropdown}
       >
         <option value="" disabled>
-          -- Select a country --
+          -- Select a location --
         </option>
-        {countries.map((country) => (
-          <option key={country.countryId} value={country.name}>
-            {country.name}
+        {locationOptions.map((locationOption) => (
+          <option key={locationOption} value={locationOption}>
+            {locationOption}
           </option>
         ))}
       </select>
-      {location.city && location.country && (
-        <p style={{ marginTop: "10px", color: "#555" }}>
-          Detected location:{" "}
-          <strong>{`${location.city}, ${location.country}`}</strong>
-        </p>
-      )}
     </div>
   );
 };
