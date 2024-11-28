@@ -16,7 +16,7 @@ import cityRoutes from "./src/routes/cityRoutes.js";
 dotenv.config();
 const app = express();
 const corsOptions = {
-  origin: "https://barnamechie.es",
+  origin: ["https://barnamechie.es", "https://www.barnamechie.es"],
   optionsSuccessStatus: 200,
 };
 app.use(express.json());
