@@ -2,7 +2,7 @@
 import Add from "@/components/Add/Add.js";
 import BottomMenu from "@/components/BottomMenu/BottomMenu.js";
 import CategoryList from "@/components/Category/CategoryList/CategoryList.js";
-import Home from "@/components/Home/Home.js";
+import Home from "@/components/Home/Home";
 import ParticlesBackground from "@/components/ParticlesBackground/ParticlesBackground.js";
 import { BottomMenuContext } from "@/context/BottomMenuContext.js";
 import React, { useContext } from "react";
