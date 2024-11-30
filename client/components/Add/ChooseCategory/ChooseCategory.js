@@ -1,9 +1,6 @@
 "use client";
-
 import React, { useState } from "react";
 import styles from "./ChooseCategory.module.css";
-
-// Icons (You can replace these with your own icons)
 import EventIcon from "@mui/icons-material/Event";
 import LocalDiningIcon from "@mui/icons-material/LocalDining";
 import PhoneIphoneIcon from "@mui/icons-material/PhoneIphone";
@@ -14,7 +11,7 @@ const ChooseCategory = () => {
   // Handle category selection
   const handleCategorySelect = (category) => {
     setSelectedCategory(category);
-    localStorage.setItem("firstStep", category); // Save the selection to localStorage
+    localStorage.setItem("firstStep", category);
   };
 
   return (

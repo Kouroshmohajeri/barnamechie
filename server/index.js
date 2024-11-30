@@ -6,6 +6,7 @@ import userRoutes from "./src/routes/userRoutes.js";
 import eventRoutes from "./src/routes/eventRoutes.js";
 import serviceRoutes from "./src/routes/serviceRoutes.js";
 import categoryRoutes from "./src/routes/categoryRoutes.js";
+import subCategoryRoutes from "./src/routes/subCategoryRoutes.js";
 import serviceCommentRoutes from "./src/routes/serviceCommentRoutes.js";
 import eventCommentRoutes from "./src/routes/eventCommentRoutes.js";
 import paymentRoutes from "./src/routes/paymentRoutes.js";
@@ -36,6 +37,7 @@ app.use("/api/payments", paymentRoutes);
 app.use("/api/advertisements", advertisementRoutes);
 app.use("/api/countries", countryRoutes);
 app.use("/api/cities", cityRoutes);
+app.use("/api/subCategory", subCategoryRoutes);
 
 // Start server
 const PORT = process.env.PORT || 8443;
