@@ -1,0 +1,56 @@
+@font-face {
+  font-family: "IranYekan";
+  src: url("/fonts/iranyekan-cdnfonts/Qs_Iranyekan.ttf");
+}
+@font-face {
+  font-family: "nunito";
+  src: url("/fonts/Nunito/Nunito-VariableFont_wght.ttf");
+}
+.categoryList {
+  position: relative;
+  z-index: 1;
+  margin: auto;
+  margin-top: 25%;
+  direction: rtl;
+  width: 85%;
+  text-align: center;
+  font-family: "IranYekan";
+  padding: 20px;
+  border-radius: 10px; /* Rounded corners */
+  background: rgba(255, 255, 255, 0.1); /* Light semi-transparent background */
+  backdrop-filter: blur(10px); /* Blur the background */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  color: white; /* Text color to stand out on the blurred background */
+}
+
+.categoryList h2 {
+  text-align: center;
+  font-size: 24px;
+  font-family: "nunito";
+  margin-bottom: 20px;
+  color: #fff; /* White color for heading */
+}
+
+.categoryList ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.categoryList li {
+  font-size: 18px;
+  margin: 15px 0;
+  padding: 10px;
+  border-radius: 8px; /* Rounded corners for each item */
+  transition: background 0.3s ease;
+}
+
+.categoryList li:hover {
+  background-color: rgba(255, 255, 255, 0.2); /* Light hover effect */
+}
+
+.divider {
+  border: 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.2); /* Divider line with light color */
+  margin: 10px 0;
+}

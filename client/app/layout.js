@@ -1,5 +1,6 @@
 import Header from "@/components/Header/Header";
 import "./globals.css";
+import BottomMenuProvider from "@/context/BottomMenuContext";
 
 export const metadata = {
   title: "Barname Chie? - برنامه چیه؟",
@@ -11,8 +12,10 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body>
-        <Header />
-        {children}
+        <BottomMenuProvider>
+          <Header />
+          {children}
+        </BottomMenuProvider>
       </body>
     </html>
   );

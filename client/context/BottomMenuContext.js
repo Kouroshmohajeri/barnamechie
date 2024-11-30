@@ -1,9 +1,9 @@
+"use client";
 import React, { createContext, useState, useContext } from "react";
 
-const BottomMenuContext = createContext();
-
-export const BottomMenuProvider = ({ children }) => {
-  const [selectedPage, setSelectedPage] = useState("home"); // Default page
+export const BottomMenuContext = createContext();
+const BottomMenuProvider = ({ children }) => {
+  const [selectedPage, setSelectedPage] = useState(0); // Default page
 
   return (
     <BottomMenuContext.Provider value={{ selectedPage, setSelectedPage }}>
@@ -12,4 +12,4 @@ export const BottomMenuProvider = ({ children }) => {
   );
 };
 
-export const useBottomMenu = () => useContext(BottomMenuContext);
+export default BottomMenuProvider;

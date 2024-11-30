@@ -6,7 +6,7 @@ import Link from "next/link";
 
 export default function Carousel() {
   const [emblaRef] = useEmblaCarousel({ loop: true }, [
-    Autoplay({ delay: 1500 }),
+    Autoplay({ delay: 5000 }),
   ]);
 
   return (

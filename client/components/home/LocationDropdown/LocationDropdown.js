@@ -2,12 +2,17 @@
 import React, { useEffect, useState } from "react";
 import { getAllCountries } from "@/api/countries/actions.js";
 import { getAllCities } from "@/api/cities/actions.js";
+import Autocomplete from "@mui/material/Autocomplete";
+import TextField from "@mui/material/TextField";
+import CircularProgress from "@mui/material/CircularProgress";
 import styles from "./LocationDropdown.module.css";
 
-const CountryDropdown = () => {
+const LocationDropdown = () => {
   const [location, setLocation] = useState({ city: "", country: "" });
   const [selectedValue, setSelectedValue] = useState("");
   const [locationOptions, setLocationOptions] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
 
   // Fetch user's location using IP geolocation API
   useEffect(() => {
@@ -25,77 +30,81 @@ const CountryDropdown = () => {
     fetchLocation();
   }, []);
 
-  // Fetch countries from the backend
+  // Fetch countries and cities from the backend
   useEffect(() => {
     const fetchCountriesAndCities = async () => {
+      setLoading(true);
       try {
-        // Fetch all countries
         const countriesData = await getAllCountries();
-        // Filter supported countries (isSupported = true)
         const supportedCountries = countriesData.filter(
           (country) => country.isSupported === true
         );
 
-        // Fetch all cities
         const citiesData = await getAllCities();
 
-        // Combine cities and countries
         const combinedLocations = supportedCountries
           .map((country) => {
-            // Get all cities for the current supported country
             const citiesInCountry = citiesData.filter(
               (city) => city.countryId === country.countryId
             );
 
-            // Combine cities with country name
             return citiesInCountry.map(
               (city) => `${city.cityName}, ${country.name}`
             );
           })
-          .flat(); // Flatten the nested array into a single array
+          .flat();
 
         setLocationOptions(combinedLocations);
       } catch (error) {
         console.error("Failed to fetch countries or cities:", error);
+      } finally {
+        setLoading(false);
       }
     };
 
     fetchCountriesAndCities();
   }, []);
 
-  // Check if the detected location is in the list
-  const isLocationAvailable = locationOptions.includes(
-    `${location.city}, ${location.country}`
-  );
-
-  // If the location is available, set it as default
-  useEffect(() => {
-    if (isLocationAvailable) {
-      setSelectedValue(`${location.city}, ${location.country}`);
-    } else {
-      setSelectedValue("");
-    }
-  }, [location, isLocationAvailable]);
+  // Handle value change in the dropdown
+  const handleSelectionChange = (event, newValue) => {
+    setSelectedValue(newValue);
+  };
 
   return (
-    <div className={styles.container}>
-      <select
-        id="countryDropdown"
+    <div
+      className={`${styles.container} ${
+        isOpen ? styles.containerClose : styles.containerOpen
+      }`}
+    >
+      <Autocomplete
+        options={locationOptions}
         value={selectedValue}
-        onChange={(e) => setSelectedValue(e.target.value)}
-        className={styles.dropdown}
-      >
-        <option value="" disabled>
-          -- Select a location --
-        </option>
-        {locationOptions.map((locationOption) => (
-          <option key={locationOption} value={locationOption}>
-            {locationOption}
-          </option>
-        ))}
-      </select>
+        onChange={handleSelectionChange}
+        onOpen={() => setIsOpen(true)}
+        onClose={() => setIsOpen(false)}
+        renderInput={(params) => (
+          <TextField
+            {...params}
+            variant="outlined"
+            placeholder="Start typing a city or country"
+            InputProps={{
+              ...params.InputProps,
+              endAdornment: (
+                <>
+                  {loading ? (
+                    <CircularProgress color="inherit" size={20} />
+                  ) : null}
+                  {params.InputProps.endAdornment}
+                </>
+              ),
+            }}
+          />
+        )}
+        loading={loading}
+        isOptionEqualToValue={(option, value) => option === value}
+      />
     </div>
   );
 };
 
-export default CountryDropdown;
+export default LocationDropdown;

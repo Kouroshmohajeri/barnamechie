@@ -1,13 +1,15 @@
 "use client";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Typography, IconButton } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import CloseIcon from "@mui/icons-material/Close";
 import styles from "./Header.module.css";
+import { BottomMenuContext } from "@/context/BottomMenuContext";
 
 const Header = () => {
   const [searchOpen, setSearchOpen] = useState(false);
   const [closing, setClosing] = useState(false);
+  const { setSelectedPage } = useContext(BottomMenuContext);
 
   const toggleSearch = () => {
     if (searchOpen) {
@@ -35,6 +37,9 @@ const Header = () => {
             variant="h6"
             component="span"
             className={styles.headerText}
+            onClick={() => {
+              setSelectedPage(0);
+            }}
           >
             برنامه چیه؟
           </Typography>

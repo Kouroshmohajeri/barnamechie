@@ -19,6 +19,7 @@ const serviceSchema = new mongoose.Schema({
   imageUrl: { type: String, required: true },
   country: { type: String, required: true },
   city: { type: String, required: true },
+  country: { type: String, required: true },
   fromHour: { type: String, default: null },
   toHour: { type: String, default: null },
   flightDate: { type: Date, default: null },
