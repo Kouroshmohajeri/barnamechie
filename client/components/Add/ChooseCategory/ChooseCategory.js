@@ -22,21 +22,21 @@ const ChooseCategory = () => {
           onClick={() => handleCategorySelect("Event")}
         >
           <EventIcon fontSize="large" />
-          <p>Event</p>
+          <p>ایونت</p>
         </div>
         <div
           className={styles.categoryBox}
           onClick={() => handleCategorySelect("Service")}
         >
           <LocalDiningIcon fontSize="large" />
-          <p>Service</p>
+          <p>خدمات</p>
         </div>
         <div
           className={styles.categoryBox}
           onClick={() => handleCategorySelect("Product")}
         >
           <PhoneIphoneIcon fontSize="large" />
-          <p>Product</p>
+          <p>محصولات</p>
         </div>
       </div>
     </div>
