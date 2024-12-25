@@ -13,6 +13,7 @@ import paymentRoutes from "./src/routes/paymentRoutes.js";
 import advertisementRoutes from "./src/routes/advertisementRoutes.js";
 import countryRoutes from "./src/routes/countryRoutes.js";
 import cityRoutes from "./src/routes/cityRoutes.js";
+import currencyRoutes from "./src/routes/currencyRoutes.js";
 
 dotenv.config();
 const app = express();
@@ -38,6 +39,7 @@ app.use("/api/advertisements", advertisementRoutes);
 app.use("/api/countries", countryRoutes);
 app.use("/api/cities", cityRoutes);
 app.use("/api/subCategory", subCategoryRoutes);
+app.use("/api/currency", currencyRoutes);
 
 // Start server
 const PORT = process.env.PORT || 8443;
