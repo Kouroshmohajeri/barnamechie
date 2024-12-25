@@ -10,10 +10,10 @@ import {
 const router = express.Router();
 
 // Routes for Currency
-router.post("/currencies", createCurrency);
-router.get("/currencies", getAllCurrencies);
-router.get("/currencies/:currencyId", getCurrencyById);
-router.put("/currencies/:currencyId", updateCurrency);
-router.delete("/currencies/:currencyId", deleteCurrency);
+router.post("/", createCurrency);
+router.get("/", getAllCurrencies);
+router.get("/:currencyId", getCurrencyById);
+router.put("/:currencyId", updateCurrency);
+router.delete("/:currencyId", deleteCurrency);
 
 export default router;
