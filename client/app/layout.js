@@ -1,6 +1,8 @@
 import Header from "@/components/Header/Header";
 import "./globals.css";
 import BottomMenuProvider from "@/context/BottomMenuContext";
+import BackProvider from "@/context/Back/BackContext";
+// import useLenis from "@/lib/useLenis";
 
 export const metadata = {
   title: "Barname Chie? - برنامه چیه؟",
@@ -9,13 +11,16 @@ export const metadata = {
 };
 
 export default function RootLayout({ children }) {
+  // useLenis();
   return (
     <html lang="en">
       <body>
-        <BottomMenuProvider>
-          <Header />
-          {children}
-        </BottomMenuProvider>
+        <BackProvider>
+          <BottomMenuProvider>
+            <Header />
+            {children}
+          </BottomMenuProvider>
+        </BackProvider>
       </body>
     </html>
   );

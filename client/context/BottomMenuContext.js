@@ -1,12 +1,15 @@
 "use client";
-import React, { createContext, useState, useContext } from "react";
+import React, { createContext, useState } from "react";
 
 export const BottomMenuContext = createContext();
 const BottomMenuProvider = ({ children }) => {
-  const [selectedPage, setSelectedPage] = useState(0); // Default page
+  const [selectedPage, setSelectedPage] = useState(0);
+  const [isHidden, setIsHidden] = useState(false);
 
   return (
-    <BottomMenuContext.Provider value={{ selectedPage, setSelectedPage }}>
+    <BottomMenuContext.Provider
+      value={{ selectedPage, setSelectedPage, isHidden, setIsHidden }}
+    >
       {children}
     </BottomMenuContext.Provider>
   );

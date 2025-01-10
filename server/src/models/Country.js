@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
 const countrySchema = new mongoose.Schema(
   {
-    countryId: { type: String, required: true, unique: true }, // Primary identifier as a string
+    countryId: { type: String, required: true, unique: true },
     name: { type: String, required: true },
     isSupported: { type: Boolean, default: false },
   },

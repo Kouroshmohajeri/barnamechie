@@ -52,6 +52,18 @@ const DataCard = () => {
       image: "/images/test/torshoshirin.jpg",
       category: "event",
     },
+    {
+      title: "ترش و شیرین",
+      description: "فروش انواع ترشی در بارسلونا",
+      image: "/images/test/torshoshirin.jpg",
+      category: "product",
+    },
+    {
+      title: "ترش و شیرین",
+      description: "فروش انواع ترشی در بارسلونا",
+      image: "/images/test/torshoshirin.jpg",
+      category: "event",
+    },
   ];
 
   return (

@@ -9,13 +9,18 @@ import NotificationsNoneIcon from "@mui/icons-material/NotificationsNone";
 import { BottomMenuContext } from "@/context/BottomMenuContext";
 
 const BottomMenu = () => {
-  const { selectedPage, setSelectedPage } = useContext(BottomMenuContext);
+  const { selectedPage, setSelectedPage, isHidden } =
+    useContext(BottomMenuContext);
 
   const handleClick = (index) => {
     setSelectedPage(index);
   };
   return (
-    <div className={styles.bottomMenu}>
+    <div
+      className={`${styles.bottomMenu} ${
+        isHidden ? styles.hidden : styles.slideIn
+      }`}
+    >
       <div className={styles.menuItems}>
         {/* Home Button */}
         <div

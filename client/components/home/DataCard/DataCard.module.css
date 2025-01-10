@@ -9,7 +9,13 @@
   gap: 1rem;
   padding: 1rem;
   position: relative;
-  padding-bottom: 20%;
+  padding-bottom: 30%;
+}
+/* Safari-specific adjustment */
+@supports (-webkit-touch-callout: none) {
+  .container {
+    padding-bottom: 60%; 
+  }
 }
 
 .pageTitle {

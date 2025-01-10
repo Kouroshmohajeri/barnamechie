@@ -8,42 +8,49 @@ export const createEvent = async (req, res) => {
       title,
       shortDescription,
       longDescription,
-      eventStartDate,
-      eventEndDate,
+      startDate,
+      endDate,
       isCancelled,
-      limit,
+      capacity,
       price,
       offer,
-      categoryId,
+      subCategoryId,
       url,
+      link,
       imageUrl,
       country,
       location,
       city,
-      time,
+      startTime,
+      endTime,
+      isOnline,
+      currencyId,
     } = req.body;
 
-    // Ensure the authenticated user's ID is set as the event holder
-    const eventHolder = req.user._id; // The authenticated user's ID
+    const userId = req.user.userId; // Authenticated user's ID
 
     const newEvent = new Event({
       title,
       shortDescription,
       longDescription,
-      eventHolder, // Set eventHolder to the authenticated user's ID
-      eventStartDate,
-      eventEndDate,
+      userId,
+      startDate,
+      endDate,
       isCancelled,
-      limit,
+      capacity,
       price,
       offer,
-      categoryId,
+      subCategoryId,
       url,
+      link,
       imageUrl,
       country,
       location,
       city,
-      time,
+      startTime,
+      endTime,
+      isOnline,
+      currencyId,
     });
 
     const savedEvent = await newEvent.save();
@@ -57,8 +64,8 @@ export const createEvent = async (req, res) => {
 export const getAllEvents = async (req, res) => {
   try {
     const events = await Event.find()
-      .populate("eventHolder")
-      .populate("categoryId");
+      .populate("userId")
+      .populate("subCategoryId");
     sendResponse(res, 200, "Events fetched successfully", events);
   } catch (error) {
     sendResponse(res, 500, "Error fetching events", null, error);
@@ -69,8 +76,8 @@ export const getAllEvents = async (req, res) => {
 export const getEventById = async (req, res) => {
   try {
     const event = await Event.findById(req.params.eventId)
-      .populate("eventHolder")
-      .populate("categoryId");
+      .populate("userId")
+      .populate("subCategoryId");
     if (!event) {
       return sendResponse(res, 404, "Event not found");
     }

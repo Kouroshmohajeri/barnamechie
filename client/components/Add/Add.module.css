@@ -1,0 +1,7 @@
+.container {
+  overflow-y: scroll;
+  padding-bottom: 5%;
+  scroll-behavior: smooth;
+  will-change: transform;
+  height: 100vh;
+}

@@ -1,0 +1,61 @@
+.container {
+  width: 90%;
+  margin: 0 auto;
+  overflow: hidden;
+  position: relative;
+}
+
+/* Swiper custom styles */
+.mySwiper {
+  width: 100%;
+  height: auto;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Individual slide styles */
+.swiperSlide {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: none;
+}
+
+.image {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Custom Pagination Container */
+.customPagination {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(10px);
+  padding: 5px;
+  border-radius: 20px;
+  min-width: 10%;
+  max-width: 90%;
+  z-index: 10;
+  height: auto;
+}
+
+.inPagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+  width: auto;
+  height: auto;
+  z-index: 2;
+}

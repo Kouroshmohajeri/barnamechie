@@ -1,17 +1,19 @@
 "use client";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import styles from "./ChooseCategory.module.css";
 import EventIcon from "@mui/icons-material/Event";
 import LocalDiningIcon from "@mui/icons-material/LocalDining";
 import PhoneIphoneIcon from "@mui/icons-material/PhoneIphone";
+import LuggageIcon from "@mui/icons-material/Luggage";
+import { CategoryContext } from "@/context/Add/ChooseCategory/CategoryContext";
 
 const ChooseCategory = () => {
-  const [selectedCategory, setSelectedCategory] = useState("");
+  const { selectedCategory, setSelectedCategory } = useContext(CategoryContext);
 
   // Handle category selection
-  const handleCategorySelect = (category) => {
+  const handleCategorySelect = (category, step) => {
     setSelectedCategory(category);
-    localStorage.setItem("firstStep", category);
+    localStorage.setItem("firstStep", step);
   };
 
   return (
@@ -19,24 +21,39 @@ const ChooseCategory = () => {
       <div className={styles.categoryGrid}>
         <div
           className={styles.categoryBox}
-          onClick={() => handleCategorySelect("Event")}
+          onClick={() => handleCategorySelect(0, "event")}
         >
-          <EventIcon fontSize="large" />
-          <p>ایونت</p>
+          <div className={styles.boxWrapper}>
+            <EventIcon fontSize="large" />
+            <p>ایونت</p>
+          </div>
         </div>
         <div
           className={styles.categoryBox}
-          onClick={() => handleCategorySelect("Service")}
+          onClick={() => handleCategorySelect(1, "service")}
         >
-          <LocalDiningIcon fontSize="large" />
-          <p>خدمات</p>
+          <div className={styles.boxWrapper}>
+            <LocalDiningIcon fontSize="large" />
+            <p>خدمات</p>
+          </div>
         </div>
         <div
           className={styles.categoryBox}
-          onClick={() => handleCategorySelect("Product")}
+          onClick={() => handleCategorySelect(2, "product")}
         >
-          <PhoneIphoneIcon fontSize="large" />
-          <p>محصولات</p>
+          <div className={styles.boxWrapper}>
+            <PhoneIphoneIcon fontSize="large" />
+            <p>محصولات</p>
+          </div>
+        </div>
+        <div
+          className={styles.categoryBox}
+          onClick={() => handleCategorySelect(3, "shipping")}
+        >
+          <div className={styles.boxWrapper}>
+            <LuggageIcon fontSize="large" />
+            <p>حمل بار</p>
+          </div>
         </div>
       </div>
     </div>

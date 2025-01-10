@@ -5,7 +5,7 @@
 .bottomMenu {
   position: fixed;
   bottom: 0;
-  left: 50%;
+  left: -4%;
   transform: translateX(-50%);
   display: flex;
   flex-direction: column;
@@ -36,11 +36,11 @@
   align-items: center;
   margin-bottom: 2%;
 }
-
+/* 
 .icon {
-  font-size: 2.21rem; /* Adjust icon size for better layout */
-  transition: font-size 0.3s ease; /* Smooth transition for size change */
-}
+  font-size: 2.21rem; 
+  transition: font-size 0.3s ease; 
+} */
 
 .indicator {
   position: absolute;
@@ -65,4 +65,31 @@
   font-size: 0.75rem;
   text-align: center;
   font-family: "nunito";
+}
+@keyframes slideDown {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(100%);
+  }
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+.hidden {
+  animation: slideDown 0.5s ease forwards; /* Smooth slide down animation */
+  visibility: hidden; /* Ensures it's not interactable after animation */
+}
+
+.slideIn {
+  animation: slideUp 0.5s ease forwards; /* Smooth slide up animation */
+  visibility: visible; /* Ensures it's interactable after animation */
 }

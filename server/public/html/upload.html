@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Image Management</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+    .image-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+    .image-card {
+      border: 1px solid #ccc;
+      padding: 10px;
+      text-align: center;
+      width: 200px;
+    }
+    .image-card img {
+      max-width: 100%;
+      height: auto;
+    }
+    .image-card button {
+      margin-top: 5px;
+      padding: 5px 10px;
+      font-size: 14px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <h1>Image Management</h1>
+  
+  <!-- Upload Form -->
+  <form id="uploadForm" action="/api/images/upload" method="POST" enctype="multipart/form-data">
+    <label for="image">Select an image:</label>
+    <input type="file" id="image" name="image" accept="image/*" required>
+    <button type="submit">Upload</button>
+  </form>
+  
+  <h2>Uploaded Images</h2>
+  <div class="image-container" id="imageContainer"></div>
+
+  <script>
+    const imageContainer = document.getElementById("imageContainer");
+    const uploadForm = document.getElementById("uploadForm");
+
+    // Fetch and display images
+    async function fetchImages() {
+  try {
+    const response = await fetch("/api/images");
+    const data = await response.json();
+
+    console.log("Fetched Images:", data.images); // Debugging
+
+    imageContainer.innerHTML = ""; // Clear container
+    data.images.forEach((imagePath) => {
+      console.log("Image Path:", imagePath); // Debugging
+
+      const filename = imagePath.split("/").pop();
+      const imageCard = document.createElement("div");
+      imageCard.className = "image-card";
+
+      imageCard.innerHTML = `
+        <img src="${imagePath}" alt="${filename}">
+        <p>${filename}</p>
+        <button onclick="deleteImage('${filename}')">Delete</button>
+        <button onclick="updateImage('${filename}')">Update</button>
+      `;
+      imageContainer.appendChild(imageCard);
+    });
+  } catch (error) {
+    console.error("Error fetching images:", error);
+  }
+}
+
+
+    // Delete an image
+    async function deleteImage(filename) {
+      try {
+        const response = await fetch(`/api/images/${filename}`, { method: "DELETE" });
+        const data = await response.json();
+        alert(data.message);
+        fetchImages(); // Refresh the image list
+      } catch (error) {
+        console.error("Error deleting image:", error);
+      }
+    }
+
+    // Update an image
+    function updateImage(filename) {
+      const newFileInput = document.createElement("input");
+      newFileInput.type = "file";
+      newFileInput.accept = "image/*";
+      newFileInput.onchange = async () => {
+        const file = newFileInput.files[0];
+        if (file) {
+          const formData = new FormData();
+          formData.append("image", file);
+
+          try {
+            const response = await fetch(`/api/images/${filename}`, {
+              method: "PUT",
+              body: formData,
+            });
+            const data = await response.json();
+            alert(data.message);
+            fetchImages(); // Refresh the image list
+          } catch (error) {
+            console.error("Error updating image:", error);
+          }
+        }
+      };
+      newFileInput.click(); // Trigger file selection dialog
+    }
+
+    // Handle upload form submission
+    uploadForm.addEventListener("submit", async (e) => {
+      e.preventDefault(); // Prevent default form submission
+      const formData = new FormData(uploadForm);
+
+      try {
+        const response = await fetch("/api/images/upload", {
+          method: "POST",
+          body: formData,
+        });
+        const data = await response.json();
+        alert(data.message);
+        fetchImages(); // Refresh the image list
+        uploadForm.reset(); // Clear the form
+      } catch (error) {
+        console.error("Error uploading image:", error);
+      }
+    });
+
+    // Initial fetch
+    fetchImages();
+  </script>
+</body>
+</html>

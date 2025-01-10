@@ -13,16 +13,16 @@ const eventSchema = new mongoose.Schema(
     longDescription: {
       type: String,
     },
-    eventHolder: {
-      type: mongoose.Schema.Types.ObjectId,
+    userId: {
+      type: String,
       ref: "User",
       required: true,
     },
-    eventStartDate: {
+    startDate: {
       type: Date,
       required: true,
     },
-    eventEndDate: {
+    endDate: {
       type: Date,
       required: true,
     },
@@ -30,7 +30,7 @@ const eventSchema = new mongoose.Schema(
       type: Boolean,
       default: false,
     },
-    limit: {
+    capacity: {
       type: Number,
       required: true,
     },
@@ -39,15 +39,24 @@ const eventSchema = new mongoose.Schema(
       required: true,
     },
     offer: {
-      type: String, // Can be a discount or offer description, nullable
+      type: Number,
       default: null,
     },
-    categoryId: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Category", // Assuming you have a Category model
+    subCategoryId: {
+      type: String,
+      ref: "SubCategory",
+      required: true,
+    },
+    currencyId: {
+      type: Number,
+      ref: "Currency",
       required: true,
     },
     url: {
+      type: String,
+      required: true,
+    },
+    link: {
       type: String,
       required: true,
     },
@@ -66,9 +75,17 @@ const eventSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    time: {
-      type: String, // You may want to store time in a string format (HH:MM or similar)
+    startTime: {
+      type: String,
       required: true,
+    },
+    endTime: {
+      type: String,
+      required: true,
+    },
+    isOnline: {
+      type: Boolean,
+      default: false,
     },
   },
   { timestamps: true }

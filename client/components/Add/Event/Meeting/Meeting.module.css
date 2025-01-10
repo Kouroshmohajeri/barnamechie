@@ -1,0 +1,102 @@
+@font-face {
+  font-family: "IranYekan";
+  src: url("/fonts/iranyekan-cdnfonts/Qs_Iranyekan.ttf");
+}
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  position: relative;
+  margin-bottom: 5%;
+
+}
+
+.backButton {
+  cursor: pointer;
+  color: white;
+  font-size: 1rem;
+  position: absolute;
+  left: 0;
+}
+.label {
+  color: white;
+}
+.title {
+  font-size: 1rem;
+  color: white;
+  font-family: "IranYekan";
+}
+
+.meetingContainer {
+  backdrop-filter: blur(10px);
+  background-color: rgba(255, 255, 255, 0.2);
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  max-width: 600px;
+  margin: 22% auto 30%;
+  direction: rtl;
+  position: relative;
+}
+
+.meetingContainer > .title {
+  text-align: center;
+}
+.row {
+  display: flex;
+  gap: 10px;
+  margin-top: 15px;
+}
+
+.field {
+  flex: 1;
+}
+
+.textField {
+  margin-top: 15px;
+}
+.charCount {
+  text-align: right;
+  font-size: 0.85rem;
+  color: #aaa;
+  margin-top: -3%;
+}
+
+.datePicker,
+.timePicker {
+  width: 100%;
+}
+
+.button {
+  margin-top: 20px !important;
+  background-color: #1976d2;
+  color: white;
+  font-family: "IranYekan" !important;
+  width: 100%;
+}
+
+.fade {
+  animation: fadeIn 0.3s ease-in-out;
+}
+.meetingContainer,
+.row,
+.field,
+.textField,
+.datePicker,
+.timePicker,
+.button,
+.fade {
+  color: white;
+  font-family: "IranYekan";
+}
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
