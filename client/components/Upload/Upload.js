@@ -42,7 +42,7 @@ const Upload = () => {
     //   toast.error("آپلود فایل ناموفق بود. دوباره تلاش کنید.");
     //   console.error(error);
     // }
-    setSelectedEvent(3);
+    setSelectedEvent("meetingPreview");
   };
 
   const handleBackClick = () => {

@@ -4,7 +4,7 @@ import ChooseEvent from "./ChooseEvent/ChooseEvent";
 import Meeting from "./Meeting/Meeting";
 import Trip from "./Trip/Trip";
 import Upload from "@/components/Upload/Upload";
-import MeetingPreview from "./Meeting/MeetingPreview";
+import EventPreview from "./EventPreview/EventPreview";
 
 const Event = () => {
   const { selectedEvent, updateEventData, eventData } = useEventContext();
@@ -12,20 +12,20 @@ const Event = () => {
   return (
     <div>
       {selectedEvent === null && <ChooseEvent />}
-      {selectedEvent === 0 && (
+      {selectedEvent === "meeting" && (
         <Meeting
           onSave={(data) => updateEventData("meeting", data)}
           savedData={eventData.meeting || {}}
         />
       )}
-      {selectedEvent === 1 && (
+      {selectedEvent === "trip" && (
         <Trip
           onSave={(data) => updateEventData("trip", data)}
           savedData={eventData.trip || {}}
         />
       )}
-      {selectedEvent === 2 && <Upload />}
-      {selectedEvent === 3 && <MeetingPreview />}
+      {selectedEvent === "upload" && <Upload />}
+      {selectedEvent === "meetingPreview" && <EventPreview />}
     </div>
   );
 };

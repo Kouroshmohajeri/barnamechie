@@ -19,8 +19,8 @@ import rtlPlugin from "stylis-plugin-rtl";
 import styles from "./Trip.module.css";
 import { BottomMenuContext } from "@/context/BottomMenuContext";
 import { getAllcurrency } from "@/api/currency/actions";
-import SkeletonLoader from "@/components/SkeletonLoader/SkeletonLoader";
 import { useEventContext } from "@/context/Add/EventCategory/EventContext";
+import { useBackContext } from "@/context/Back/BackContext";
 
 const cacheRtl = createCache({
   key: "muirtl",
@@ -65,9 +65,11 @@ const theme = createTheme({
 
 const Trip = () => {
   const [currencies, setCurrencies] = useState([]);
-
   const { setSelectedEvent } = useEventContext();
   const { setIsHidden } = useContext(BottomMenuContext);
+  const { setStep } = useBackContext();
+
+  // Initial empty state
   const [initialValues, setInitialValues] = useState({
     tripName: "",
     startDate: null,
@@ -82,6 +84,7 @@ const Trip = () => {
     capacity: "",
   });
 
+  // Fetch currencies and load saved data on component mount
   useEffect(() => {
     const fetchCurrencies = async () => {
       try {
@@ -96,8 +99,6 @@ const Trip = () => {
         }
       } catch (error) {
         console.error("Error fetching currencies:", error);
-      } finally {
-        setIsLoading(false);
       }
     };
 
@@ -107,6 +108,7 @@ const Trip = () => {
         setInitialValues({
           ...initialValues,
           ...savedData,
+          // Parse dates if available
           startDate: savedData.startDate ? dayjs(savedData.startDate) : null,
           endDate: savedData.endDate ? dayjs(savedData.endDate) : null,
         });
@@ -117,34 +119,27 @@ const Trip = () => {
     loadSavedData();
   }, []);
 
-  useEffect(() => {
-    // Load saved form data from local storage
-    const savedData = JSON.parse(localStorage.getItem("tripFormData"));
-    if (savedData) {
-      setInitialValues({
-        ...initialValues,
-        ...savedData,
-        startDate: savedData.startDate ? dayjs(savedData.startDate) : null,
-        endDate: savedData.endDate ? dayjs(savedData.endDate) : null,
-      });
-    }
-  }, []);
-
   const backButton = () => {
     setSelectedEvent(null);
     setIsHidden(false);
   };
 
   const handleSubmit = (values) => {
+    // Save form data to local storage
     localStorage.setItem("tripFormData", JSON.stringify(values));
-    setSelectedEvent(2);
+    setSelectedEvent("upload");
+    setStep("trip");
   };
 
   return (
     <CacheProvider value={cacheRtl}>
       <ThemeProvider theme={theme}>
         <LocalizationProvider dateAdapter={AdapterDayjs}>
-          <Formik initialValues={initialValues} onSubmit={handleSubmit}>
+          <Formik
+            initialValues={initialValues}
+            onSubmit={handleSubmit}
+            enableReinitialize
+          >
             {({ values, handleChange, setFieldValue }) => (
               <Form className={styles.tripContainer}>
                 <div className={styles.header}>
@@ -155,6 +150,7 @@ const Trip = () => {
                   <span className={styles.title}>سفر چیه؟</span>
                 </div>
 
+                {/* Trip Name */}
                 <Field name="tripName">
                   {({ field }) => (
                     <TextField
@@ -168,6 +164,7 @@ const Trip = () => {
                   )}
                 </Field>
 
+                {/* Start and End Dates */}
                 <div className={styles.row}>
                   <DatePicker
                     label="تاریخ شروع"
@@ -185,6 +182,7 @@ const Trip = () => {
                   />
                 </div>
 
+                {/* Origin and Destination */}
                 <div className={styles.row}>
                   <Field name="origin">
                     {({ field }) => (
@@ -211,6 +209,8 @@ const Trip = () => {
                     )}
                   </Field>
                 </div>
+
+                {/* Accommodation */}
                 <div className={styles.row}>
                   <Field name="accommodation">
                     {({ field }) => (
@@ -224,35 +224,7 @@ const Trip = () => {
                     )}
                   </Field>
                 </div>
-                <div className={styles.row}>
-                  <Field name="shortDescription">
-                    {({ field }) => (
-                      <TextField
-                        {...field}
-                        label="توضیح کوتاه"
-                        variant="outlined"
-                        fullWidth
-                        className={styles.textField}
-                      />
-                    )}
-                  </Field>
-                </div>
-                <div className={styles.row}>
-                  <Field name="longDescription">
-                    {({ field }) => (
-                      <TextField
-                        {...field}
-                        label="دقیقا سفر چیه؟"
-                        variant="outlined"
-                        fullWidth
-                        multiline
-                        rows={4}
-                        className={styles.textField}
-                      />
-                    )}
-                  </Field>
-                </div>
-
+                {/* Price, Currency, and Capacity */}
                 <div className={styles.row}>
                   <Field name="price">
                     {({ field }) => (
@@ -290,6 +262,38 @@ const Trip = () => {
                   </Field>
                 </div>
 
+                {/* Descriptions */}
+                <div className={styles.row}>
+                  <Field name="shortDescription">
+                    {({ field }) => (
+                      <TextField
+                        {...field}
+                        label="توضیح کوتاه"
+                        variant="outlined"
+                        fullWidth
+                        className={styles.textField}
+                      />
+                    )}
+                  </Field>
+                </div>
+
+                <div className={styles.row}>
+                  <Field name="longDescription">
+                    {({ field }) => (
+                      <TextField
+                        {...field}
+                        label="دقیقا سفر چیه؟"
+                        variant="outlined"
+                        fullWidth
+                        multiline
+                        rows={4}
+                        className={styles.textField}
+                      />
+                    )}
+                  </Field>
+                </div>
+
+                {/* Submit Button */}
                 <Button
                   variant="contained"
                   fullWidth

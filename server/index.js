@@ -15,6 +15,8 @@ import countryRoutes from "./src/routes/countryRoutes.js";
 import cityRoutes from "./src/routes/cityRoutes.js";
 import currencyRoutes from "./src/routes/currencyRoutes.js";
 import imageRoutes from "./src/routes/imageRoutes.js";
+import tripRoutes from "./src/routes/tripRoutes.js";
+
 import path from "path";
 
 dotenv.config();
@@ -34,6 +36,7 @@ connectDB(); // Initiates MongoDB connection using database.js
 // Routes
 app.use("/api/users", userRoutes);
 app.use("/api/events", eventRoutes);
+app.use("/api/trips", tripRoutes);
 // app.use("/api/services", serviceRoutes);
 app.use("/api/categories", categoryRoutes);
 app.use("/api/serviceComments", serviceCommentRoutes);

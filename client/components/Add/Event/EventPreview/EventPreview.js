@@ -1,14 +1,16 @@
 import React, { useEffect, useState } from "react";
-import styles from "./MeetingPreview.module.css";
+import styles from "./EventPreview.module.css";
 import { FaArrowLeft } from "react-icons/fa";
 import { useEventContext } from "@/context/Add/EventCategory/EventContext";
 import CardSwiper from "@/components/CardSwiper/CardSwiper";
-import Details from "@/components/Details/Details";
+import EventDetails from "@/components/Add/Event/EventDetails/EventDetails";
+import { useBackContext } from "@/context/Back/BackContext";
 
-const MeetingPreview = ({ onBack }) => {
+const EventPreview = ({ onBack }) => {
   const meetingFormData = JSON.parse(localStorage.getItem("meetingFormData"));
   const uploadData = JSON.parse(localStorage.getItem("uploadData"));
   const { setSelectedEvent } = useEventContext();
+  const { step } = useBackContext();
   const mainImage =
     uploadData?.selectedFiles[uploadData?.mainImageIndex]?.preview;
 
@@ -32,7 +34,7 @@ const MeetingPreview = ({ onBack }) => {
   }, []);
 
   const backButton = () => {
-    setSelectedEvent(2);
+    setSelectedEvent(step);
   };
   const handlePublish = () => {
     // Add logic for publish action here
@@ -51,7 +53,7 @@ const MeetingPreview = ({ onBack }) => {
 
       {/* Main Image */}
       <CardSwiper />
-      <Details />
+      <EventDetails />
       {/* Publish Button */}
       <div className={styles.buttonContainer}>
         <button className={styles.publishButton} onClick={handlePublish}>
@@ -62,4 +64,4 @@ const MeetingPreview = ({ onBack }) => {
   );
 };
 
-export default MeetingPreview;
+export default EventPreview;

@@ -29,13 +29,19 @@ const ChooseEvent = () => {
   return (
     <div className={styles.container}>
       <div className={styles.eventGrid}>
-        <div className={styles.eventBox} onClick={() => handleEventSelect(0)}>
+        <div
+          className={styles.eventBox}
+          onClick={() => handleEventSelect("meeting")}
+        >
           <div className={styles.boxWrapper}>
             <PeopleIcon fontSize="large" />
             <p>برنامه</p>
           </div>
         </div>
-        <div className={styles.eventBox} onClick={() => handleEventSelect(1)}>
+        <div
+          className={styles.eventBox}
+          onClick={() => handleEventSelect("trip")}
+        >
           <div className={styles.boxWrapper}>
             <FlightIcon fontSize="large" />
             <p>سفر</p>

@@ -29,6 +29,7 @@ import { getAllCountries } from "@/api/countries/actions";
 import { getAllCities } from "@/api/cities/actions";
 import { toast } from "react-toastify";
 import dayjs from "dayjs";
+import { useBackContext } from "@/context/Back/BackContext";
 
 const theme = createTheme({
   direction: "rtl",
@@ -87,6 +88,7 @@ const Meeting = () => {
   const { selectedEvent, setSelectedEvent } = useContext(EventContext);
   const { setIsHidden } = useContext(BottomMenuContext);
   const [loading, setLoading] = useState(true);
+  const { setStep } = useBackContext();
   const [formData, setFormData] = useState({
     title: "",
     country: "",
@@ -183,7 +185,8 @@ const Meeting = () => {
       toast.error("لطفا درصد تخفیف را وارد کنید");
       return;
     }
-    setSelectedEvent(2);
+    setSelectedEvent("upload");
+    setStep("meeting");
   };
 
   return (
@@ -399,6 +402,16 @@ const Meeting = () => {
                       )}
                     </Field>
                   </FormControl>
+                  <Field name="capacity">
+                    {({ field }) => (
+                      <TextField
+                        {...field}
+                        type="number"
+                        label="ظرفیت"
+                        className={styles.field}
+                      />
+                    )}
+                  </Field>
                 </div>
                 <div className={styles.row}>
                   <Field name="shortDescription">
