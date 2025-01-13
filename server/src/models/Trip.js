@@ -53,7 +53,15 @@ const tripSchema = new mongoose.Schema(
       required: true,
     },
     imageUrl: {
-      type: String,
+      type: [String], // Now accepts an array of strings
+      validate: {
+        validator: function (value) {
+          return (
+            Array.isArray(value) && value.every((v) => typeof v === "string")
+          );
+        },
+        message: "imageUrl must be an array of strings",
+      },
     },
     origin: {
       type: String,
