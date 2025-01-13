@@ -49,7 +49,7 @@ export const createTrip = async (req, res) => {
       dateOfPublish: new Date(),
       isCancelled: false,
     };
-
+    console.log(tripData);
     const savedTrip = await createTripInDb(tripData);
 
     sendResponse(res, 201, "Trip created successfully", savedTrip);
