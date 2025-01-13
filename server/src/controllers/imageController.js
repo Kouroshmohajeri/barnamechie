@@ -2,7 +2,7 @@ import fs from "fs";
 import path from "path";
 export const uploadImage = (req, res) => {
   try {
-    console.log(req);
+    console.log(req.data);
     if (!req.file) {
       return res.status(400).json({ message: "No file uploaded!" });
     }
