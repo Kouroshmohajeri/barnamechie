@@ -63,6 +63,10 @@ const tripSchema = new mongoose.Schema(
         message: "imageUrl must be an array of strings",
       },
     },
+    mainImage: {
+      type: String,
+      required: true,
+    },
     origin: {
       type: String,
       required: true,
