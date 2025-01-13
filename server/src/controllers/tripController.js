@@ -7,11 +7,51 @@ import {
 } from "../repositories/tripRepository.js";
 import sendResponse from "../services/response.js";
 
-// Create a new trip
 export const createTrip = async (req, res) => {
   try {
-    const tripData = { ...req.body, userId: req.user.userId };
+    const {
+      title,
+      shortDescription,
+      longDescription,
+      startDate,
+      endDate,
+      capacity,
+      price,
+      subCategoryId,
+      currencyId,
+      url,
+      imageUrl,
+      origin,
+      destination,
+      country,
+      mainImage,
+    } = req.body;
+
+    const userId = req.user.userId; // Assuming the user ID comes from the authenticated user
+
+    const tripData = {
+      title,
+      shortDescription,
+      longDescription,
+      startDate,
+      endDate,
+      capacity,
+      price,
+      subCategoryId,
+      currencyId,
+      url,
+      imageUrl,
+      origin,
+      destination,
+      country,
+      mainImage,
+      userId,
+      dateOfPublish: new Date(),
+      isCancelled: false,
+    };
+
     const savedTrip = await createTripInDb(tripData);
+
     sendResponse(res, 201, "Trip created successfully", savedTrip);
   } catch (error) {
     sendResponse(res, 500, "Error creating trip", null, error);
