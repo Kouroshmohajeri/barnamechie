@@ -27,7 +27,7 @@ export const createTrip = async (req, res) => {
       mainImage,
     } = req.body;
 
-    const userId = req.user.userId; // Assuming the user ID comes from the authenticated user
+    const userId = 1; //req.user.userId // Assuming the user ID comes from the authenticated user
 
     const tripData = {
       title,
