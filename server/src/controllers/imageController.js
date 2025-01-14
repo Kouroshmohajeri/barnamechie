@@ -1,17 +1,31 @@
 import fs from "fs";
 import path from "path";
+
 export const uploadImage = (req, res) => {
   try {
-    console.log(req.data);
     if (!req.file) {
       return res.status(400).json({ message: "No file uploaded!" });
     }
-    const imagePath = `/images/${req.file.filename}`;
-    res
-      .status(200)
-      .json({ message: "Image uploaded successfully!", imagePath });
+
+    const { type, tripId, meetingId } = req.body;
+    const userId = 1; // Replace with authenticated user's ID
+    let imagePath;
+
+    if (type === "meeting") {
+      imagePath = `/mtg/${meetingId}-${userId}/${req.file.filename}`;
+    } else if (type === "trip") {
+      imagePath = `/trp/${tripId}-${userId}/${req.file.filename}`;
+    } else {
+      return res.status(400).json({ message: "Invalid type provided." });
+    }
+
+    res.status(200).json({
+      message: "Image uploaded successfully!",
+      imagePath,
+    });
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    console.error("Error uploading image:", error.message);
+    res.status(500).json({ message: "Internal server error." });
   }
 };
 

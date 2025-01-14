@@ -27,8 +27,7 @@ export const createTrip = async (req, res) => {
       mainImage,
     } = req.body;
 
-    const userId = 1; //req.user.userId // Assuming the user ID comes from the authenticated user
-
+    const userId = 1; // Replace with authenticated user's ID
     const tripData = {
       title,
       shortDescription,
@@ -49,10 +48,14 @@ export const createTrip = async (req, res) => {
       dateOfPublish: new Date(),
       isCancelled: false,
     };
-    console.log(tripData);
+
     const savedTrip = await createTripInDb(tripData);
 
-    sendResponse(res, 201, "Trip created successfully", savedTrip);
+    // Include the `tripId` in the response
+    sendResponse(res, 201, "Trip created successfully", {
+      tripId: savedTrip._id,
+      ...savedTrip.toObject(),
+    });
   } catch (error) {
     sendResponse(res, 500, "Error creating trip", null, error);
   }

@@ -1,13 +1,31 @@
-// src/middleware/uploadMiddleware.js
 import multer from "multer";
 import path from "path";
+import fs from "fs";
 
-const __dirname = path.resolve(); // Use for directory resolution
+const __dirname = path.resolve();
 
-// Configure multer
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, path.join(__dirname, "public/images"));
+    const { type, tripId, meetingId } = req.body; // Get type and ID from the request body
+    const userId = 1; // Replace with authenticated user's ID (e.g., `req.user.userId`)
+
+    let folderPath;
+
+    if (type === "meeting") {
+      folderPath = path.join(__dirname, `public/mtg/${meetingId}-${userId}`);
+    } else if (type === "trip") {
+      folderPath = path.join(__dirname, `public/trp/${tripId}-${userId}`);
+    } else {
+      return cb(new Error("Invalid type! Must be 'meeting' or 'trip'."), null);
+    }
+
+    // Create the directory if it doesn't exist
+    fs.mkdir(folderPath, { recursive: true }, (err) => {
+      if (err) {
+        return cb(err, null);
+      }
+      cb(null, folderPath);
+    });
   },
   filename: (req, file, cb) => {
     const uniqueSuffix = Date.now() + "-" + Math.round(Math.random() * 1e9);
@@ -21,16 +39,12 @@ const upload = multer({
     fileSize: 5 * 1024 * 1024, // 5 MB limit
   },
   fileFilter: (req, file, cb) => {
-    const fileTypes = /jpeg|jpg|png|gif/;
-    const extname = fileTypes.test(
-      path.extname(file.originalname).toLowerCase()
-    );
-    const mimeType = fileTypes.test(file.mimetype);
-
-    if (extname && mimeType) {
+    const allowedTypes = /jpeg|jpg|png|gif/;
+    const isValidType = allowedTypes.test(file.mimetype);
+    if (isValidType) {
       cb(null, true);
     } else {
-      cb(new Error("Only images are allowed!"));
+      cb(new Error("Invalid file type. Only images are allowed."));
     }
   },
 });
