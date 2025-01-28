@@ -27,7 +27,8 @@ export const createEvent = async (req, res) => {
       currencyId,
     } = req.body;
 
-    const userId = req.user.userId; // Authenticated user's ID
+    // const userId = req.user.userId;
+    const userId = 1;
 
     const newEvent = new Event({
       title,
