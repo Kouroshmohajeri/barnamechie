@@ -60,7 +60,7 @@ const eventSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    imageUrl: {
+    mainImage: {
       type: String,
     },
     country: {
