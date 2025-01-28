@@ -57,6 +57,7 @@ export const createEvent = async (req, res) => {
     const savedEvent = await newEvent.save();
     sendResponse(res, 201, "Event created successfully", savedEvent);
   } catch (error) {
+    console.log(error);
     sendResponse(res, 500, "Error creating event", null, error);
   }
 };
