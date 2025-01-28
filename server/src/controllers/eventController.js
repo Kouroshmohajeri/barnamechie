@@ -26,7 +26,28 @@ export const createEvent = async (req, res) => {
       isOnline,
       currencyId,
     } = req.body;
-
+    console.log(
+      title,
+      shortDescription,
+      longDescription,
+      startDate,
+      endDate,
+      isCancelled,
+      capacity,
+      price,
+      offer,
+      subCategoryId,
+      url,
+      link,
+      imageUrl,
+      country,
+      location,
+      city,
+      startTime,
+      endTime,
+      isOnline,
+      currencyId
+    );
     // const userId = req.user.userId;
     const userId = 1;
 
@@ -57,7 +78,6 @@ export const createEvent = async (req, res) => {
     const savedEvent = await newEvent.save();
     sendResponse(res, 201, "Event created successfully", savedEvent);
   } catch (error) {
-    console.log(error);
     sendResponse(res, 500, "Error creating event", null, error);
   }
 };
