@@ -25,7 +25,6 @@ export const createEvent = async (req, res) => {
       isOnline,
       currencyId,
     } = req.body;
-
     // const userId = req.user.userId; // Uncomment if you use authentication
     const userId = 1; // Replace with actual user ID logic
 

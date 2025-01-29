@@ -8,9 +8,9 @@ const eventSchema = new mongoose.Schema(
       required: true,
     },
     url: {
-      type: String, // Ensure this field exists
-      unique: true, // Ensure uniqueness in the database
-      required: true,
+      type: String,
+      unique: true,
+      required: false,
     },
     shortDescription: {
       type: String,
@@ -60,7 +60,7 @@ const eventSchema = new mongoose.Schema(
     },
     link: {
       type: String,
-      required: true,
+      required: false,
     },
     mainImage: {
       type: String,
