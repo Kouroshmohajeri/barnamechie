@@ -1,9 +1,15 @@
 import mongoose from "mongoose";
+import { generateUniqueUrl } from "../middleware/preSaveMiddleware.js";
 
 const eventSchema = new mongoose.Schema(
   {
     title: {
       type: String,
+      required: true,
+    },
+    url: {
+      type: String, // Ensure this field exists
+      unique: true, // Ensure uniqueness in the database
       required: true,
     },
     shortDescription: {
@@ -52,10 +58,6 @@ const eventSchema = new mongoose.Schema(
       ref: "Currency",
       required: true,
     },
-    url: {
-      type: String,
-      required: true,
-    },
     link: {
       type: String,
       required: true,
@@ -90,6 +92,9 @@ const eventSchema = new mongoose.Schema(
   },
   { timestamps: true }
 );
+
+// Attach middleware
+eventSchema.pre("save", generateUniqueUrl);
 
 const Event = mongoose.model("Event", eventSchema);
 

@@ -15,7 +15,6 @@ export const createEvent = async (req, res) => {
       price,
       offer,
       subCategoryId,
-      url,
       link,
       mainImage,
       country,
@@ -26,30 +25,9 @@ export const createEvent = async (req, res) => {
       isOnline,
       currencyId,
     } = req.body;
-    console.log(
-      `title: ${title}\n`,
-      `short description: ${shortDescription}\n`,
-      `long des: ${longDescription}\n`,
-      `start date: ${startDate}\n`,
-      `end date: ${endDate}\n`,
-      `is cancelled: ${isCancelled}\n`,
-      `capacity: ${capacity}\n`,
-      `price: ${price}\n`,
-      `offer: ${offer}\n`,
-      `sub cat ID: ${subCategoryId}\n`,
-      `url: ${url}\n`,
-      `link: ${link}\n`,
-      `imageUrl: ${mainImage}\n`,
-      `country: ${country}\n`,
-      `location: ${location}\n`,
-      `city: ${city}\n`,
-      `start time: ${startTime}\n`,
-      `end time: ${endTime}\n`,
-      `is online: ${isOnline}\n`,
-      `currency: ${currencyId}\n`
-    );
-    // const userId = req.user.userId;
-    const userId = 1;
+
+    // const userId = req.user.userId; // Uncomment if you use authentication
+    const userId = 1; // Replace with actual user ID logic
 
     const newEvent = new Event({
       title,
@@ -63,7 +41,6 @@ export const createEvent = async (req, res) => {
       price,
       offer,
       subCategoryId,
-      url,
       link,
       mainImage,
       country,
@@ -76,7 +53,11 @@ export const createEvent = async (req, res) => {
     });
 
     const savedEvent = await newEvent.save();
-    sendResponse(res, 201, "Event created successfully", savedEvent);
+
+    // Return only the event ID and success message
+    sendResponse(res, 201, "Event created successfully", {
+      id: savedEvent._id,
+    });
   } catch (error) {
     sendResponse(res, 500, "Error creating event", null, error);
   }
