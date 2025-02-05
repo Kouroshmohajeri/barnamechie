@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import { generateUniqueUrl } from "../middleware/preSaveMiddleware";
+import { generateUniqueUrl } from "../middleware/preSaveMiddleware.js";
 
 const tripSchema = new mongoose.Schema(
   {
