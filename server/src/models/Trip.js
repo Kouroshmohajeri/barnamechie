@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import { generateUniqueUrl } from "../middleware/preSaveMiddleware";
 
 const tripSchema = new mongoose.Schema(
   {
@@ -50,7 +51,8 @@ const tripSchema = new mongoose.Schema(
     },
     url: {
       type: String,
-      required: true,
+      unique: true,
+      required: false,
     },
     accommodation: {
       type: String,
@@ -78,6 +80,7 @@ const tripSchema = new mongoose.Schema(
   },
   { timestamps: true }
 );
+eventSchema.pre("save", generateUniqueUrl);
 
 const Trip = mongoose.model("Trip", tripSchema);
 
