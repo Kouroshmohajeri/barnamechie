@@ -80,7 +80,7 @@ const tripSchema = new mongoose.Schema(
   },
   { timestamps: true }
 );
-eventSchema.pre("save", generateUniqueUrl);
+tripSchema.pre("save", generateUniqueUrl);
 
 const Trip = mongoose.model("Trip", tripSchema);
 
