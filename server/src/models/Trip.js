@@ -52,7 +52,7 @@ const tripSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    accomodation: {
+    accommodation: {
       type: String,
       required: true,
     },
