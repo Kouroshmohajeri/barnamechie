@@ -51,7 +51,7 @@ export const createTrip = async (req, res) => {
 
     // Include the `tripId` in the response
     sendResponse(res, 201, "Trip created successfully", {
-      tripId: savedTrip._id,
+      id: savedTrip._id,
       ...savedTrip.toObject(),
     });
   } catch (error) {
